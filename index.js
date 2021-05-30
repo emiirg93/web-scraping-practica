@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const puppeteer = require('puppeteer');
+const { guardarCasas } = require('./guardarEnDB');
 
 (async () => {
     console.log('empezando scrapper ...');
@@ -99,9 +100,13 @@ const puppeteer = require('puppeteer');
         casas.push(detallesCasa);
     }
 
-    const data = JSON.stringify(casas);
+    /* const data = JSON.stringify(casas);
 
-    fs.writeFileSync(path.join(__dirname,'casas.json'), data);
+    fs.writeFileSync(path.join(__dirname,'casas.json'), data); */
+
+    await guardarCasas(casas);
+
+    console.log('Casas guardadas correctamente')
 
     await browser.close();
     process.exit();
